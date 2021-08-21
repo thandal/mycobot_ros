@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="firefighter" >
 
-<xacro:property name="width" value=".2" />
+  <xacro:property name="width" value=".2" />
+
+  <link name="dummy">
+  </link>
 
   <link name="base">
     <visual>
@@ -11,10 +14,10 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
 	<mesh filename="package://mycobot_description/urdf/mycobot_320/base_fixed.dae"/> 
       </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -30,10 +33,10 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </visual>
     <collision>
-      <origin xyz="0 0 -0.02" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://mycobot_description/urdf/mycobot_320/link1_fixed.dae"/>
       </geometry>
+      <origin xyz="0 0 -0.02" rpy="0 0 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -49,10 +52,10 @@
       <origin xyz="0 0 0.0587" rpy="0 0 3.1415926"/>
     </visual>
     <collision>
-     <origin xyz="0.07 0 0.095" rpy="0 -1.5708 0"/>
       <geometry>
         <mesh filename="package://mycobot_description/urdf/mycobot_320/link2_fixed.dae"/>
       </geometry>
+      <origin xyz="0.07 0 0.095" rpy="0 -1.5708 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -68,10 +71,10 @@
       <origin xyz="0 0 0.038" rpy="0 0 3.1415926"/>
     </visual>
     <collision>
-      <origin xyz="0.044 0 0" rpy="0 -1.5708 0"/>
       <geometry>
        <mesh filename="package://mycobot_description/urdf/mycobot_320/link3_fixed.dae"/>
       </geometry>
+      <origin xyz="0.044 0 0" rpy="0 -1.5708 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -87,10 +90,10 @@
       <origin xyz="0 -0.001 0" rpy="0 0 0"/>
     </visual>
     <collision>
-      <origin xyz="0.0 -0.014 0" rpy="0 -1.5708 1.5708"/>
       <geometry>
         <mesh filename="package://mycobot_description/urdf/mycobot_320/link4_fixed.dae"/>
       </geometry>
+      <origin xyz="0.0 -0.014 0" rpy="0 -1.5708 1.5708"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -106,10 +109,10 @@
       <origin xyz="0 0.002 0" rpy=" 0  0 3.1415926"/>
     </visual>
     <collision>
-      <origin xyz="0 -0.01 0" rpy=" 1.5708 1.5708 0"/>
       <geometry>
         <mesh filename="package://mycobot_description/urdf/mycobot_320/link5_fixed.dae"/>
       </geometry>
+      <origin xyz="0 -0.01 0" rpy=" 1.5708 1.5708 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -119,19 +122,19 @@
 
   <link name="link6">
     <visual>
-      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
       <geometry>
         <cylinder length="0.02" radius="0.026"/>
       </geometry>
       <material name="grey">
         <color rgba="0.5 0.5 0.5 1"/>
       </material>
+      <origin xyz="0 0 -0.01" rpy="0 0 0"/>
     </visual>
     <collision>
-      <origin xyz="0.0 0 -0.01" rpy="0 0 0"/>
       <geometry>
         <cylinder length="0.0225" radius="0.026"/>
       </geometry>
+      <origin xyz="0.0 0 -0.01" rpy="0 0 0"/>
     </collision>
     <inertial>
       <mass value="0.1" />
@@ -152,6 +155,11 @@
     </inertial>
   </link>
 
+  <joint name="dummy_joint" type="fixed">
+    <parent link="dummy"/>
+    <child link="base"/>
+  </joint>
+
   <joint name="link1_to_base" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-3.14" upper="3.14159" velocity="0"/>
@@ -169,7 +177,7 @@
   </joint>
 
   <joint name="link3_to_link2" type="revolute">
-    <axis xyz=" 0 0 1"/>
+    <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-3.14" upper="3.14159" velocity="0"/>
     <parent link="link2"/>
     <child link="link3"/>
@@ -177,7 +185,7 @@
   </joint>
 
   <joint name="link4_to_link3" type="revolute">
-    <axis xyz=" 0 0 1"/>
+    <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-3.14" upper="3.14159" velocity="0"/>
     <parent link="link3"/>
     <child link="link4"/>
