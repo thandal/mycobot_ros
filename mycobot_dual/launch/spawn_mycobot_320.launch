@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="mycobot_320">
+    <arg name="model" default="$(find mycobot_description)/urdf/mycobot_320/mycobot_320_fixed.urdf"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+    <param name="tf_prefix" value="mycobot_320" />
+    <include file="$(find mycobot_dual)/launch/spawn_robot_template.launch" >
+      <arg name="robot_name" value="mycobot_320" />
+      <arg name="init_pose"  value="-x 0 -y -0.1 -z 0" />
+    </include>
+  </group>
+</launch>
