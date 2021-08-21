@@ -9,6 +9,9 @@ FROM ${BASE_IMAGE}
 # https://github.com/docker/for-mac/issues/2155
 COPY --from=osrf/ros:melodic-desktop-full / /
 
+# Patch for the "SSL: no alternative certificate" issue
+RUN cat /usr/share/ignition/fuel_tools/config.yaml | sed s/api\.ignitionfuel/fuel\.ignitionrobotics/ > /usr/share/ignition/fuel_tools/config.yaml
+
 # Add ROS env vars to the bashrc
 ENV BASH_ENV="/root/launch.sh"
 SHELL ["/bin/bash", "-c"]
